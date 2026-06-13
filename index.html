@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolo das 4 Princesas - Pedidos</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #fdf2f5; color: #5a2a35; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; text-align: center; padding: 36px 15px 24px 15px; background-color: #fdf2f5; border-bottom: 1px solid transparent; transition: padding 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+        #header-spacer { flex-shrink: 0; }
+        header.scrolled { padding: 10px 15px; box-shadow: 0 2px 12px rgba(184,76,101,0.13); border-bottom-color: #f0d0d8; }
+        .header-inner { display: flex; flex-direction: column; align-items: center; transition: flex-direction 0.3s ease; }
+        header.scrolled .header-inner { flex-direction: row; justify-content: center; gap: 14px; }
+        header img { max-height: 140px; width: auto; display: block; background: none; transition: max-height 0.3s ease; }
+        header.scrolled img { max-height: 38px; }
+        .ig-link { color: #b84c65; text-decoration: none; font-weight: bold; font-size: 1.05em; display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 7px 18px; border-radius: 20px; background-color: #fce8ed; transition: margin-top 0.3s ease, font-size 0.3s ease, padding 0.3s ease; }
+        header.scrolled .ig-link { margin-top: 0; font-size: 0.88em; padding: 4px 12px; }
+        .ig-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+        .container { flex: 1; max-width: 600px; margin: 0 auto; padding: 15px; width: 100%; }
+        h2 { color: #b84c65; text-align: center; margin-bottom: 25px; font-size: 1.5em; }
+        .card { background: #ffffff; border-radius: 16px; padding: 18px 20px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(184,76,101,0.08); border: 1px solid #f0d0d8; display: flex; flex-direction: column; }
+        .card-header { margin-bottom: 6px; }
+        .card-title { font-size: 1.15em; font-weight: bold; color: #7a2042; margin: 0; }
+        .card-desc { font-size: 0.9em; color: #8c6b73; margin: 0 0 14px 0; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; }
+        .card-price { font-weight: bold; color: #7a2042; font-size: 1.25em; }
+        .counter { display: flex; align-items: center; border: 1.5px solid #d8a0b0; border-radius: 50px; overflow: hidden; }
+        .btn-qty { background-color: transparent; color: #7a2042; border: none; width: 40px; height: 40px; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
+        .btn-qty:active { background-color: #fce8ed; }
+        .qty-val { font-weight: bold; width: 28px; text-align: center; font-size: 1.05em; color: #5a2a35; }
+        .summary { background: #ffffff; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #fce8ed; display: none; }
+        .summary.visible { display: block; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95em; }
+        .summary-row.total { font-weight: bold; font-size: 1.1em; border-top: 1px solid #fce8ed; padding-top: 10px; margin-top: 5px; color: #b84c65; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 0.95em; color: #5a2a35; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid #f0c4cf; border-radius: 8px; font-size: 1em; background-color: #fff; color: #5a2a35; outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: #b84c65; }
+        .btn-submit { width: 100%; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-submit:active { transform: scale(0.98); }
+        footer { text-align: center; padding: 25px 15px; font-size: 0.85em; color: #8c6b73; border-top: 1px solid #fce8ed; margin-top: 20px; }
+        footer a { color: #b84c65; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header id="site-header">
+    <div class="header-inner">
+        <img src="logo_bolo_4_princesas.png" alt="Bolo das 4 Princesas">
+        <a href="https://www.instagram.com/bolo_4_princesas" target="_blank" class="ig-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @bolo_4_princesas
+        </a>
+    </div>
+</header>
+
+<div id="header-spacer"></div>
+
+<div class="container">
+
+    <h2>Nosso Cardapio</h2>
+
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Bolo de Chocolate</span>
+        </div>
+        <p class="card-desc">Massa fofinha com cobertura cremosa e granulado.</p>
+        <div class="card-footer">
+            <span class="card-price">R$ 18,00</span>
+            <div class="counter">
+                <button class="btn-qty" data-id="1" data-delta="-1">−</button>
+                <span class="qty-val" id="qty-1">0</span>
+                <button class="btn-qty" data-id="1" data-delta="1">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Bolo de Cenoura com Chocolate</span>
+        </div>
+        <p class="card-desc">Massa umida de cenoura com farta cobertura de brigadeiro.</p>
+        <div class="card-footer">
+            <span class="card-price">R$ 18,00</span>
+            <div class="counter">
+                <button class="btn-qty" data-id="2" data-delta="-1">−</button>
+                <span class="qty-val" id="qty-2">0</span>
+                <button class="btn-qty" data-id="2" data-delta="1">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Bolo de Fuba</span>
+        </div>
+        <p class="card-desc">Tradicional bolo de fuba, perfeito para acompanhar um cafe.</p>
+        <div class="card-footer">
+            <span class="card-price">R$ 12,00</span>
+            <div class="counter">
+                <button class="btn-qty" data-id="3" data-delta="-1">−</button>
+                <span class="qty-val" id="qty-3">0</span>
+                <button class="btn-qty" data-id="3" data-delta="1">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Bolo de Maracuja</span>
+        </div>
+        <p class="card-desc">Refrescante com calda de maracuja e coco ralado.</p>
+        <div class="card-footer">
+            <span class="card-price">R$ 20,00</span>
+            <div class="counter">
+                <button class="btn-qty" data-id="4" data-delta="-1">−</button>
+                <span class="qty-val" id="qty-4">0</span>
+                <button class="btn-qty" data-id="4" data-delta="1">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Bolo Red Velvet</span>
+        </div>
+        <p class="card-desc">Massa vermelha aveludada com cobertura de cream cheese.</p>
+        <div class="card-footer">
+            <span class="card-price">R$ 25,00</span>
+            <div class="counter">
+                <button class="btn-qty" data-id="5" data-delta="-1">−</button>
+                <span class="qty-val" id="qty-5">0</span>
+                <button class="btn-qty" data-id="5" data-delta="1">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Bolo de Coco</span>
+        </div>
+        <p class="card-desc">Molhadinho e super recheado com coco ralado.</p>
+        <div class="card-footer">
+            <span class="card-price">R$ 15,00</span>
+            <div class="counter">
+                <button class="btn-qty" data-id="6" data-delta="-1">−</button>
+                <span class="qty-val" id="qty-6">0</span>
+                <button class="btn-qty" data-id="6" data-delta="1">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="summary" id="summary">
+        <h2 style="margin-top:0; font-size:1.2em;">Resumo do Pedido</h2>
+        <div id="summary-items"></div>
+        <div class="summary-row">
+            <span>Taxa de entrega</span>
+            <span>R$ 5,00</span>
+        </div>
+        <div class="summary-row total">
+            <span>Total</span>
+            <span id="summary-total">R$ 0,00</span>
+        </div>
+    </div>
+
+    <h2>Dados para Entrega</h2>
+
+    <div class="form-group">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" placeholder="Ex: Maria da Silva">
+    </div>
+    <div class="form-group">
+        <label for="whatsapp">Seu WhatsApp</label>
+        <input type="tel" id="whatsapp" placeholder="(48) 99999-9999">
+    </div>
+    <div class="form-group">
+        <label for="endereco">Endereco de entrega</label>
+        <textarea id="endereco" rows="3" placeholder="Rua, numero, bairro - ponto de referencia"></textarea>
+    </div>
+
+    <button class="btn-submit" id="btn-pedido">Fazer Pedido pelo WhatsApp</button>
+
+</div>
+
+<footer>
+    Disponivel todas as tardes a partir das 15h<br>
+    Av. Getulio Vargas, em frente ao Asilo - Ararangua/SC<br><br>
+    <a href="https://www.instagram.com/bolo_4_princesas" target="_blank">@bolo_4_princesas</a>
+</footer>
+
+<script>
+    var cardapio = [
+        { id: 1, nome: 'Bolo de Chocolate', preco: 18 },
+        { id: 2, nome: 'Bolo de Cenoura com Chocolate', preco: 18 },
+        { id: 3, nome: 'Bolo de Fuba', preco: 12 },
+        { id: 4, nome: 'Bolo de Maracuja', preco: 20 },
+        { id: 5, nome: 'Bolo Red Velvet', preco: 25 },
+        { id: 6, nome: 'Bolo de Coco', preco: 15 }
+    ];
+
+    var quantidades = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+    var TAXA_ENTREGA = 5;
+
+    function formatarReais(valor) {
+        return 'R$ ' + valor.toFixed(2).replace('.', ',');
+    }
+
+    function atualizarResumo() {
+        var itensSelecionados = [];
+        var subtotal = 0;
+        for (var i = 0; i < cardapio.length; i++) {
+            var item = cardapio[i];
+            var qty = quantidades[item.id];
+            if (qty > 0) {
+                itensSelecionados.push({ nome: item.nome, qty: qty, preco: item.preco });
+                subtotal += qty * item.preco;
+            }
+        }
+        var summary = document.getElementById('summary');
+        var summaryItems = document.getElementById('summary-items');
+        var summaryTotal = document.getElementById('summary-total');
+        if (itensSelecionados.length === 0) {
+            summary.classList.remove('visible');
+            return;
+        }
+        summary.classList.add('visible');
+        var html = '';
+        for (var j = 0; j < itensSelecionados.length; j++) {
+            var s = itensSelecionados[j];
+            html += '<div class="summary-row"><span>' + s.qty + 'x ' + s.nome + '</span><span>' + formatarReais(s.qty * s.preco) + '</span></div>';
+        }
+        summaryItems.innerHTML = html;
+        summaryTotal.textContent = formatarReais(subtotal + TAXA_ENTREGA);
+    }
+
+    var botoes = document.querySelectorAll('.btn-qty');
+    for (var b = 0; b < botoes.length; b++) {
+        botoes[b].addEventListener('click', function() {
+            var id = parseInt(this.getAttribute('data-id'));
+            var delta = parseInt(this.getAttribute('data-delta'));
+            var nova = quantidades[id] + delta;
+            if (nova < 0) { nova = 0; }
+            quantidades[id] = nova;
+            document.getElementById('qty-' + id).textContent = nova;
+            atualizarResumo();
+        });
+    }
+
+    document.getElementById('btn-pedido').addEventListener('click', function() {
+        var itensSelecionados = [];
+        var subtotal = 0;
+        for (var i = 0; i < cardapio.length; i++) {
+            var item = cardapio[i];
+            var qty = quantidades[item.id];
+            if (qty > 0) {
+                itensSelecionados.push(qty + 'x ' + item.nome + ' - ' + formatarReais(qty * item.preco));
+                subtotal += qty * item.preco;
+            }
+        }
+        if (itensSelecionados.length === 0) {
+            alert('Por favor, adicione pelo menos um bolo ao pedido.');
+            return;
+        }
+        var nome = document.getElementById('nome').value.trim();
+        var whatsapp = document.getElementById('whatsapp').value.trim();
+        var endereco = document.getElementById('endereco').value.trim();
+        if (!nome || !whatsapp || !endereco) {
+            alert('Por favor, preencha todos os dados de entrega.');
+            return;
+        }
+        var total = subtotal + TAXA_ENTREGA;
+        var msg = 'Ola! Gostaria de fazer um pedido:\n\n';
+        msg += 'Itens do Pedido:\n';
+        for (var j = 0; j < itensSelecionados.length; j++) {
+            msg += itensSelecionados[j] + '\n';
+        }
+        msg += '\nTaxa de entrega: ' + formatarReais(TAXA_ENTREGA) + '\n';
+        msg += 'Total: ' + formatarReais(total) + '\n\n';
+        msg += 'Dados de entrega:\n';
+        msg += 'Nome: ' + nome + '\n';
+        msg += 'WhatsApp: ' + whatsapp + '\n';
+        msg += 'Endereco: ' + endereco;
+        var url = 'https://wa.me/5511993725215?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank');
+    });
+
+    (function() {
+        var header = document.getElementById('site-header');
+        var spacer = document.getElementById('header-spacer');
+
+        function updateSpacer() {
+            spacer.style.height = header.offsetHeight + 'px';
+        }
+
+        var logo = header.querySelector('img');
+        if (logo.complete) {
+            updateSpacer();
+        } else {
+            logo.addEventListener('load', updateSpacer);
+            logo.addEventListener('error', updateSpacer);
+        }
+        window.addEventListener('resize', updateSpacer);
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 60) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    })();
+</script>
+
+</body>
+</html>
