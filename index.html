@@ -39,6 +39,7 @@
         .form-group input:focus, .form-group textarea:focus { border-color: #b84c65; }
         .btn-submit { width: 100%; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 10px; }
         .btn-submit:active { transform: scale(0.98); }
+        .btn-submit:disabled { background-color: #9cc9aa; cursor: not-allowed; transform: none; }
         footer { text-align: center; padding: 25px 15px; font-size: 0.85em; color: #8c6b73; border-top: 1px solid #fce8ed; margin-top: 20px; }
         footer a { color: #b84c65; text-decoration: none; font-weight: bold; }
     </style>
@@ -164,22 +165,7 @@
         </div>
     </div>
 
-    <h2>Dados para Entrega</h2>
-
-    <div class="form-group">
-        <label for="nome">Nome completo</label>
-        <input type="text" id="nome" placeholder="Ex: Maria da Silva">
-    </div>
-    <div class="form-group">
-        <label for="whatsapp">Seu WhatsApp</label>
-        <input type="tel" id="whatsapp" placeholder="(48) 99999-9999">
-    </div>
-    <div class="form-group">
-        <label for="endereco">Endereco de entrega</label>
-        <textarea id="endereco" rows="3" placeholder="Rua, numero, bairro - ponto de referencia"></textarea>
-    </div>
-
-    <button class="btn-submit" id="btn-pedido">Fazer Pedido pelo WhatsApp</button>
+    <button class="btn-submit" id="btn-pedido" disabled>Ir para Checkout</button>
 
 </div>
 
@@ -201,6 +187,7 @@
 
     var quantidades = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
     var TAXA_ENTREGA = 5;
+    var btnPedido = document.getElementById('btn-pedido');
 
     function formatarReais(valor) {
         return 'R$ ' + valor.toFixed(2).replace('.', ',');
@@ -220,6 +207,7 @@
         var summary = document.getElementById('summary');
         var summaryItems = document.getElementById('summary-items');
         var summaryTotal = document.getElementById('summary-total');
+        btnPedido.disabled = itensSelecionados.length === 0;
         if (itensSelecionados.length === 0) {
             summary.classList.remove('visible');
             return;
@@ -247,7 +235,7 @@
         });
     }
 
-    document.getElementById('btn-pedido').addEventListener('click', function() {
+    btnPedido.addEventListener('click', function() {
         var itensSelecionados = [];
         var subtotal = 0;
         for (var i = 0; i < cardapio.length; i++) {
@@ -262,26 +250,20 @@
             alert('Por favor, adicione pelo menos um bolo ao pedido.');
             return;
         }
-        var nome = document.getElementById('nome').value.trim();
-        var whatsapp = document.getElementById('whatsapp').value.trim();
-        var endereco = document.getElementById('endereco').value.trim();
-        if (!nome || !whatsapp || !endereco) {
-            alert('Por favor, preencha todos os dados de entrega.');
-            return;
-        }
         var total = subtotal + TAXA_ENTREGA;
-        var msg = 'Ola! Gostaria de fazer um pedido:\n\n';
-        msg += 'Itens do Pedido:\n';
+        var resumoPedido = '';
         for (var j = 0; j < itensSelecionados.length; j++) {
-            msg += itensSelecionados[j] + '\n';
+            resumoPedido += itensSelecionados[j] + '\n';
         }
-        msg += '\nTaxa de entrega: ' + formatarReais(TAXA_ENTREGA) + '\n';
-        msg += 'Total: ' + formatarReais(total) + '\n\n';
-        msg += 'Dados de entrega:\n';
-        msg += 'Nome: ' + nome + '\n';
-        msg += 'WhatsApp: ' + whatsapp + '\n';
-        msg += 'Endereco: ' + endereco;
-        var url = 'https://wa.me/5511993725215?text=' + encodeURIComponent(msg);
+        resumoPedido += 'Taxa de entrega: ' + formatarReais(TAXA_ENTREGA) + '\n';
+        resumoPedido += 'Total: ' + formatarReais(total);
+
+        var formBaseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdSOBA8WvvchXXRcTZqIid-COtGeE4Yj2litRHOZz6aJT0kEA/viewform';
+        var params = [
+            'usp=pp_url',
+            'entry.643180112=' + encodeURIComponent(resumoPedido)
+        ];
+        var url = formBaseUrl + '?' + params.join('&');
         window.open(url, '_blank');
     });
 
