@@ -20,6 +20,29 @@
         .container { flex: 1; max-width: 600px; margin: 0 auto; padding: 15px; width: 100%; }
         h2 { color: #b84c65; text-align: center; margin-bottom: 25px; font-size: 1.5em; }
         .card { background: #ffffff; border-radius: 16px; padding: 18px 20px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(184,76,101,0.08); border: 1px solid #f0d0d8; display: flex; flex-direction: column; }
+        .card-image-wrap { width: 100%; height: 240px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #f3d5dd; overflow: hidden; background: #f9edf1; }
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: var(--img-pos, 50% 50%);
+            transform: scale(var(--img-zoom, 1.12));
+            transform-origin: center;
+            display: block;
+            cursor: zoom-in;
+            animation: image-drift var(--img-speed, 2.2s) linear infinite alternate;
+        }
+        .card:hover .card-image { animation-play-state: paused; }
+        @keyframes image-drift {
+            from { transform: scale(var(--img-zoom, 1.12)) translateY(var(--img-from-y, -6%)); }
+            to { transform: scale(var(--img-zoom, 1.12)) translateY(var(--img-to-y, 6%)); }
+        }
+        .img-ninho-vulcao { --img-pos: 50% 62%; --img-zoom: 1.04; --img-from-y: -2.8%; --img-to-y: 2.8%; --img-speed: 2.1s; }
+        .img-limao { --img-pos: 50% 54%; --img-zoom: 1.14; --img-from-y: -4.8%; --img-to-y: 4.8%; --img-speed: 2.3s; }
+        .img-ninho { --img-pos: 50% 66%; --img-zoom: 1.03; --img-from-y: -2.8%; --img-to-y: 2.8%; --img-speed: 2.1s; }
+        .img-chocolate { --img-pos: 50% 52%; --img-zoom: 1.10; --img-from-y: -4.2%; --img-to-y: 4.2%; --img-speed: 2.2s; }
+        .img-chocolate-vulcao { --img-pos: 50% 61%; --img-zoom: 1.03; --img-from-y: -2.8%; --img-to-y: 2.8%; --img-speed: 2.1s; }
+        .img-laranja { --img-pos: 50% 57%; --img-zoom: 1.14; --img-from-y: -4.8%; --img-to-y: 4.8%; --img-speed: 2.3s; }
         .card-header { margin-bottom: 6px; }
         .card-title { font-size: 1.15em; font-weight: bold; color: #7a2042; margin: 0; }
         .card-desc { font-size: 0.9em; color: #8c6b73; margin: 0 0 14px 0; }
@@ -33,6 +56,8 @@
         .summary.visible { display: block; }
         .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95em; }
         .summary-row.total { font-weight: bold; font-size: 1.1em; border-top: 1px solid #fce8ed; padding-top: 10px; margin-top: 5px; color: #b84c65; }
+        .pickup-note { background: #fff7f9; border: 1px solid #f0d0d8; border-radius: 12px; padding: 14px 16px; margin: 0 0 14px 0; color: #7a2042; font-size: 0.95em; line-height: 1.4; }
+        .pickup-note strong { color: #6a1738; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 0.95em; color: #5a2a35; }
         .form-group input, .form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid #f0c4cf; border-radius: 8px; font-size: 1em; background-color: #fff; color: #5a2a35; outline: none; }
@@ -40,6 +65,45 @@
         .btn-submit { width: 100%; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 10px; }
         .btn-submit:active { transform: scale(0.98); }
         .btn-submit:disabled { background-color: #9cc9aa; cursor: not-allowed; transform: none; }
+        .image-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(42, 13, 21, 0.72);
+        }
+        .image-modal.visible { display: flex; }
+        .image-modal-content {
+            width: min(860px, 100%);
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #f0d0d8;
+            box-shadow: 0 18px 40px rgba(42, 13, 21, 0.25);
+        }
+        .image-modal-content img { width: 100%; max-height: 68vh; object-fit: contain; display: block; background: #fdf2f5; }
+        .image-modal-body { padding: 16px 18px 20px; }
+        .image-modal-title { margin: 0 0 6px 0; font-size: 1.45em; color: #7a2042; }
+        .image-modal-desc { margin: 0 0 10px 0; color: #8c6b73; line-height: 1.35; }
+        .image-modal-price { font-weight: bold; color: #7a2042; font-size: 1.35em; }
+        .image-modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            border: none;
+            border-radius: 999px;
+            width: 36px;
+            height: 36px;
+            font-size: 23px;
+            line-height: 1;
+            color: #7a2042;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+        }
         footer { text-align: center; padding: 25px 15px; font-size: 0.85em; color: #8c6b73; border-top: 1px solid #fce8ed; margin-top: 20px; }
         footer a { color: #b84c65; text-decoration: none; font-weight: bold; }
     </style>
@@ -60,15 +124,18 @@
 
 <div class="container">
 
-    <h2>Nosso Cardapio</h2>
+    <h2>Nosso Cardápio</h2>
 
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">Bolo de Chocolate</span>
+        <div class="card-image-wrap">
+            <img class="card-image img-ninho-vulcao" src="produtos/ninho_vulcao.png" alt="Bolo Ninho Vulcão">
         </div>
-        <p class="card-desc">Massa fofinha com cobertura cremosa e granulado.</p>
+        <div class="card-header">
+            <span class="card-title">Bolo Ninho Vulcão</span>
+        </div>
+        <p class="card-desc">Bolo vulcão de ninho com recheio caseiro de leite ninho, massa leve e super macia, feito com muito carinho. Finalizado com bastante cobertura para entregar uma experiência cremosa e marcante em cada fatia.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 18,00</span>
+            <span class="card-price">R$ 60,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="1" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-1">0</span>
@@ -78,12 +145,15 @@
     </div>
 
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">Bolo de Cenoura com Chocolate</span>
+        <div class="card-image-wrap">
+            <img class="card-image img-limao" src="produtos/limao.png" alt="Bolo de Limão">
         </div>
-        <p class="card-desc">Massa umida de cenoura com farta cobertura de brigadeiro.</p>
+        <div class="card-header">
+            <span class="card-title">Bolo de Limão</span>
+        </div>
+        <p class="card-desc">Bolo de limão com aquele toque especial, massa super macia e fofinha, com sabor cítrico equilibrado na medida certa. Uma opção leve, refrescante e caseira para qualquer momento do dia.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 18,00</span>
+            <span class="card-price">R$ 25,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="2" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-2">0</span>
@@ -93,12 +163,15 @@
     </div>
 
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">Bolo de Fuba</span>
+        <div class="card-image-wrap">
+            <img class="card-image img-ninho" src="produtos/ninho.png" alt="Bolo de Leite Ninho">
         </div>
-        <p class="card-desc">Tradicional bolo de fuba, perfeito para acompanhar um cafe.</p>
+        <div class="card-header">
+            <span class="card-title">Bolo de Leite Ninho</span>
+        </div>
+        <p class="card-desc">Bolo de leite ninho caseiro com cobertura caseira de ninho, massa macia e bem fofinha. Delicado, doce na medida certa e com textura que derrete na boca.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 12,00</span>
+            <span class="card-price">R$ 35,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="3" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-3">0</span>
@@ -108,12 +181,15 @@
     </div>
 
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">Bolo de Maracuja</span>
+        <div class="card-image-wrap">
+            <img class="card-image img-chocolate" src="produtos/chocolate.png" alt="Bolo de Chocolate">
         </div>
-        <p class="card-desc">Refrescante com calda de maracuja e coco ralado.</p>
+        <div class="card-header">
+            <span class="card-title">Bolo de Chocolate</span>
+        </div>
+        <p class="card-desc">Bolo de chocolate caseiro com massa super fofinha e cobertura de brigadeiro caseira, preparado com muito amor. Sabor intenso, textura macia e aquele gostinho de bolo feito em casa.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 20,00</span>
+            <span class="card-price">R$ 35,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="4" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-4">0</span>
@@ -123,12 +199,15 @@
     </div>
 
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">Bolo Red Velvet</span>
+        <div class="card-image-wrap">
+            <img class="card-image img-chocolate-vulcao" src="produtos/chocolate_vulcao.png" alt="Bolo de Chocolate Vulcão">
         </div>
-        <p class="card-desc">Massa vermelha aveludada com cobertura de cream cheese.</p>
+        <div class="card-header">
+            <span class="card-title">Bolo de Chocolate Vulcão</span>
+        </div>
+        <p class="card-desc">Bolo de chocolate vulcão com massa super macia e fofinha, recheio cremoso e cobertura de brigadeiro caseira transbordando no centro. Uma versão mais indulgente para quem ama chocolate de verdade.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 25,00</span>
+            <span class="card-price">R$ 50,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="5" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-5">0</span>
@@ -138,12 +217,15 @@
     </div>
 
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">Bolo de Coco</span>
+        <div class="card-image-wrap">
+            <img class="card-image img-laranja" src="produtos/laranja.png" alt="Bolo de Laranja Natural">
         </div>
-        <p class="card-desc">Molhadinho e super recheado com coco ralado.</p>
+        <div class="card-header">
+            <span class="card-title">Bolo de Laranja Natural</span>
+        </div>
+        <p class="card-desc">Bolo de laranja natural, super fofinho e de muita qualidade, feito no estilo caseiro com sabor autêntico da fruta. Leve, perfumado e perfeito para acompanhar um café fresquinho.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 15,00</span>
+            <span class="card-price">R$ 22,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="6" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-6">0</span>
@@ -155,18 +237,30 @@
     <div class="summary" id="summary">
         <h2 style="margin-top:0; font-size:1.2em;">Resumo do Pedido</h2>
         <div id="summary-items"></div>
-        <div class="summary-row">
-            <span>Taxa de entrega</span>
-            <span>R$ 5,00</span>
-        </div>
         <div class="summary-row total">
             <span>Total</span>
             <span id="summary-total">R$ 0,00</span>
         </div>
     </div>
 
+    <div class="pickup-note">
+        <strong>Aviso importante:</strong> no momento, os pedidos devem ser retirados em <strong>Av. Getulio Vargas, em frente ao Asilo</strong>, das <strong>15h as 20h</strong>. O dia e horário de retirada serão combinados via WhatsApp.
+    </div>
+
     <button class="btn-submit" id="btn-pedido" disabled>Ir para Checkout</button>
 
+</div>
+
+<div class="image-modal" id="image-modal" aria-hidden="true">
+    <button class="image-modal-close" id="image-modal-close" aria-label="Fechar">×</button>
+    <div class="image-modal-content" role="dialog" aria-modal="true" aria-labelledby="image-modal-title">
+        <img id="image-modal-img" src="" alt="">
+        <div class="image-modal-body">
+            <h3 class="image-modal-title" id="image-modal-title"></h3>
+            <p class="image-modal-desc" id="image-modal-desc"></p>
+            <div class="image-modal-price" id="image-modal-price"></div>
+        </div>
+    </div>
 </div>
 
 <footer>
@@ -177,16 +271,15 @@
 
 <script>
     var cardapio = [
-        { id: 1, nome: 'Bolo de Chocolate', preco: 18 },
-        { id: 2, nome: 'Bolo de Cenoura com Chocolate', preco: 18 },
-        { id: 3, nome: 'Bolo de Fuba', preco: 12 },
-        { id: 4, nome: 'Bolo de Maracuja', preco: 20 },
-        { id: 5, nome: 'Bolo Red Velvet', preco: 25 },
-        { id: 6, nome: 'Bolo de Coco', preco: 15 }
+        { id: 1, nome: 'Bolo Ninho Vulcão', preco: 60 },
+        { id: 2, nome: 'Bolo de Limão', preco: 25 },
+        { id: 3, nome: 'Bolo de Leite Ninho', preco: 35 },
+        { id: 4, nome: 'Bolo de Chocolate', preco: 35 },
+        { id: 5, nome: 'Bolo de Chocolate Vulcão', preco: 50 },
+        { id: 6, nome: 'Bolo de Laranja Natural', preco: 22 }
     ];
 
     var quantidades = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
-    var TAXA_ENTREGA = 5;
     var btnPedido = document.getElementById('btn-pedido');
 
     function formatarReais(valor) {
@@ -219,7 +312,7 @@
             html += '<div class="summary-row"><span>' + s.qty + 'x ' + s.nome + '</span><span>' + formatarReais(s.qty * s.preco) + '</span></div>';
         }
         summaryItems.innerHTML = html;
-        summaryTotal.textContent = formatarReais(subtotal + TAXA_ENTREGA);
+        summaryTotal.textContent = formatarReais(subtotal);
     }
 
     var botoes = document.querySelectorAll('.btn-qty');
@@ -250,12 +343,11 @@
             alert('Por favor, adicione pelo menos um bolo ao pedido.');
             return;
         }
-        var total = subtotal + TAXA_ENTREGA;
+        var total = subtotal;
         var resumoPedido = '';
         for (var j = 0; j < itensSelecionados.length; j++) {
             resumoPedido += itensSelecionados[j] + '\n';
         }
-        resumoPedido += 'Taxa de entrega: ' + formatarReais(TAXA_ENTREGA) + '\n';
         resumoPedido += 'Total: ' + formatarReais(total);
 
         var formBaseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdSOBA8WvvchXXRcTZqIid-COtGeE4Yj2litRHOZz6aJT0kEA/viewform';
@@ -266,6 +358,52 @@
         var url = formBaseUrl + '?' + params.join('&');
         window.open(url, '_blank');
     });
+
+    (function() {
+        var modal = document.getElementById('image-modal');
+        var modalImg = document.getElementById('image-modal-img');
+        var modalTitle = document.getElementById('image-modal-title');
+        var modalDesc = document.getElementById('image-modal-desc');
+        var modalPrice = document.getElementById('image-modal-price');
+        var closeBtn = document.getElementById('image-modal-close');
+        var imagens = document.querySelectorAll('.card-image');
+
+        function abrirModal(img) {
+            var card = img.closest('.card');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            modalTitle.textContent = card.querySelector('.card-title').textContent;
+            modalDesc.textContent = card.querySelector('.card-desc').textContent;
+            modalPrice.textContent = card.querySelector('.card-price').textContent;
+            modal.classList.add('visible');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharModal() {
+            modal.classList.remove('visible');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        for (var i = 0; i < imagens.length; i++) {
+            imagens[i].addEventListener('click', function() {
+                abrirModal(this);
+            });
+        }
+
+        closeBtn.addEventListener('click', fecharModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                fecharModal();
+            }
+        });
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('visible')) {
+                fecharModal();
+            }
+        });
+    })();
 
     (function() {
         var header = document.getElementById('site-header');
