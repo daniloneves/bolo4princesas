@@ -37,12 +37,12 @@
             from { transform: scale(var(--img-zoom, 1.12)) translateY(var(--img-from-y, -6%)); }
             to { transform: scale(var(--img-zoom, 1.12)) translateY(var(--img-to-y, 6%)); }
         }
-        .img-ninho-vulcao { --img-pos: 50% 62%; --img-zoom: 1.04; --img-from-y: -2.8%; --img-to-y: 2.8%; --img-speed: 2.1s; }
-        .img-limao { --img-pos: 50% 54%; --img-zoom: 1.14; --img-from-y: -4.8%; --img-to-y: 4.8%; --img-speed: 2.3s; }
-        .img-ninho { --img-pos: 50% 66%; --img-zoom: 1.03; --img-from-y: -2.8%; --img-to-y: 2.8%; --img-speed: 2.1s; }
-        .img-chocolate { --img-pos: 50% 52%; --img-zoom: 1.10; --img-from-y: -4.2%; --img-to-y: 4.2%; --img-speed: 2.2s; }
-        .img-chocolate-vulcao { --img-pos: 50% 61%; --img-zoom: 1.03; --img-from-y: -2.8%; --img-to-y: 2.8%; --img-speed: 2.1s; }
         .img-laranja { --img-pos: 50% 57%; --img-zoom: 1.14; --img-from-y: -4.8%; --img-to-y: 4.8%; --img-speed: 2.3s; }
+        .img-cenoura { --img-pos: 50% 55%; --img-zoom: 1.13; --img-from-y: -4.8%; --img-to-y: 4.8%; --img-speed: 2.3s; }
+        .img-formigueiro { --img-pos: 50% 54%; --img-zoom: 1.13; --img-from-y: -4.4%; --img-to-y: 4.4%; --img-speed: 2.2s; }
+        .img-mesclado-caseiro { --img-pos: 50% 56%; --img-zoom: 1.13; --img-from-y: -4.2%; --img-to-y: 4.2%; --img-speed: 2.2s; }
+        .img-amanteigado-caseiro { --img-pos: 50% 55%; --img-zoom: 1.12; --img-from-y: -4.2%; --img-to-y: 4.2%; --img-speed: 2.2s; }
+        .img-chocolate { --img-pos: 50% 52%; --img-zoom: 1.10; --img-from-y: -4.2%; --img-to-y: 4.2%; --img-speed: 2.2s; }
         .card-header { margin-bottom: 6px; }
         .card-title { font-size: 1.15em; font-weight: bold; color: #7a2042; margin: 0; }
         .card-desc { font-size: 0.9em; color: #8c6b73; margin: 0 0 14px 0; }
@@ -56,8 +56,8 @@
         .summary.visible { display: block; }
         .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95em; }
         .summary-row.total { font-weight: bold; font-size: 1.1em; border-top: 1px solid #fce8ed; padding-top: 10px; margin-top: 5px; color: #b84c65; }
-        .pickup-note { background: #fff7f9; border: 1px solid #f0d0d8; border-radius: 12px; padding: 14px 16px; margin: 0 0 14px 0; color: #7a2042; font-size: 0.95em; line-height: 1.4; }
-        .pickup-note strong { color: #6a1738; }
+        .delivery-note { background: #fff7f9; border: 1px solid #f0d0d8; border-radius: 12px; padding: 14px 16px; margin: 0 0 14px 0; color: #7a2042; font-size: 0.95em; line-height: 1.4; }
+        .delivery-note strong { color: #6a1738; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 0.95em; color: #5a2a35; }
         .form-group input, .form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid #f0c4cf; border-radius: 8px; font-size: 1em; background-color: #fff; color: #5a2a35; outline: none; }
@@ -128,14 +128,14 @@
 
     <div class="card">
         <div class="card-image-wrap">
-            <img class="card-image img-ninho-vulcao" src="produtos/ninho_vulcao.png" alt="Bolo Ninho Vulcão">
+            <img class="card-image img-laranja" src="produtos/laranja.png" alt="Bolo de Laranja Natural">
         </div>
         <div class="card-header">
-            <span class="card-title">Bolo Ninho Vulcão</span>
+            <span class="card-title">Bolo de Laranja Natural</span>
         </div>
-        <p class="card-desc">Bolo vulcão de ninho com recheio caseiro de leite ninho, massa leve e super macia, feito com muito carinho. Finalizado com bastante cobertura para entregar uma experiência cremosa e marcante em cada fatia.</p>
+        <p class="card-desc">Bolo de laranja natural, super fofinho e de muita qualidade, feito no estilo caseiro com sabor autêntico da fruta. Leve, perfumado e perfeito para acompanhar um café fresquinho.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 60,00</span>
+            <span class="card-price">R$ 22,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="1" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-1">0</span>
@@ -146,14 +146,14 @@
 
     <div class="card">
         <div class="card-image-wrap">
-            <img class="card-image img-limao" src="produtos/limao.png" alt="Bolo de Limão">
+            <img class="card-image img-cenoura" src="produtos/cenoura.png" alt="Bolo de Cenoura">
         </div>
         <div class="card-header">
-            <span class="card-title">Bolo de Limão</span>
+            <span class="card-title">Bolo de Cenoura</span>
         </div>
-        <p class="card-desc">Bolo de limão com aquele toque especial, massa super macia e fofinha, com sabor cítrico equilibrado na medida certa. Uma opção leve, refrescante e caseira para qualquer momento do dia.</p>
+        <p class="card-desc">Bolo de cenoura natural, com massa macia, fofinha e sabor irresistível. Receita caseira preparada com carinho, perfeita para quem ama aquele clássico delicioso do dia a dia.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 25,00</span>
+            <span class="card-price">R$ 22,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="2" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-2">0</span>
@@ -164,18 +164,54 @@
 
     <div class="card">
         <div class="card-image-wrap">
-            <img class="card-image img-ninho" src="produtos/ninho.png" alt="Bolo de Leite Ninho">
+            <img class="card-image img-formigueiro" src="produtos/formigueiro.png" alt="Bolo Formigueiro">
         </div>
         <div class="card-header">
-            <span class="card-title">Bolo de Leite Ninho</span>
+            <span class="card-title">Bolo Formigueiro</span>
         </div>
-        <p class="card-desc">Bolo de leite ninho caseiro com cobertura caseira de ninho, massa macia e bem fofinha. Delicado, doce na medida certa e com textura que derrete na boca.</p>
+        <p class="card-desc">Delicioso bolo formigueiro, com massa macia e fofinha, salpicada com granulado de chocolate na medida certa. Simples, tradicional e com aquele sabor caseiro que conquista em cada fatia.</p>
         <div class="card-footer">
-            <span class="card-price">R$ 35,00</span>
+            <span class="card-price">R$ 15,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="3" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-3">0</span>
                 <button class="btn-qty" data-id="3" data-delta="1">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image-wrap">
+            <img class="card-image img-mesclado-caseiro" src="produtos/mesclado_caseiro.png" alt="Bolo Mesclado Caseiro">
+        </div>
+        <div class="card-header">
+            <span class="card-title">Bolo Mesclado Caseiro</span>
+        </div>
+        <p class="card-desc">Bolo mesclado caseiro, macio e fofinho, feito com massa de baunilha e chocolate delicadamente misturadas, criando um visual ainda mais bonito. Uma opção clássica, leve e deliciosa para todos os paladares.</p>
+        <div class="card-footer">
+            <span class="card-price">R$ 15,00</span>
+            <div class="counter">
+                <button class="btn-qty" data-id="4" data-delta="-1">−</button>
+                <span class="qty-val" id="qty-4">0</span>
+                <button class="btn-qty" data-id="4" data-delta="1">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image-wrap">
+            <img class="card-image img-amanteigado-caseiro" src="produtos/amanteigado_caseiro.png" alt="Bolo Amanteigado Caseiro">
+        </div>
+        <div class="card-header">
+            <span class="card-title">Bolo Amanteigado Caseiro</span>
+        </div>
+        <p class="card-desc">Bolo amanteigado caseiro, feito com massa natural, macio, fofinho e com sabor irresistível. Simples, tradicional e delicioso, perfeito para acompanhar um café fresquinho a qualquer hora.</p>
+        <div class="card-footer">
+            <span class="card-price">R$ 12,00</span>
+            <div class="counter">
+                <button class="btn-qty" data-id="5" data-delta="-1">−</button>
+                <span class="qty-val" id="qty-5">0</span>
+                <button class="btn-qty" data-id="5" data-delta="1">+</button>
             </div>
         </div>
     </div>
@@ -190,42 +226,6 @@
         <p class="card-desc">Bolo de chocolate caseiro com massa super fofinha e cobertura de brigadeiro caseira, preparado com muito amor. Sabor intenso, textura macia e aquele gostinho de bolo feito em casa.</p>
         <div class="card-footer">
             <span class="card-price">R$ 35,00</span>
-            <div class="counter">
-                <button class="btn-qty" data-id="4" data-delta="-1">−</button>
-                <span class="qty-val" id="qty-4">0</span>
-                <button class="btn-qty" data-id="4" data-delta="1">+</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-image-wrap">
-            <img class="card-image img-chocolate-vulcao" src="produtos/chocolate_vulcao.png" alt="Bolo de Chocolate Vulcão">
-        </div>
-        <div class="card-header">
-            <span class="card-title">Bolo de Chocolate Vulcão</span>
-        </div>
-        <p class="card-desc">Bolo de chocolate vulcão com massa super macia e fofinha, recheio cremoso e cobertura de brigadeiro caseira transbordando no centro. Uma versão mais indulgente para quem ama chocolate de verdade.</p>
-        <div class="card-footer">
-            <span class="card-price">R$ 50,00</span>
-            <div class="counter">
-                <button class="btn-qty" data-id="5" data-delta="-1">−</button>
-                <span class="qty-val" id="qty-5">0</span>
-                <button class="btn-qty" data-id="5" data-delta="1">+</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-image-wrap">
-            <img class="card-image img-laranja" src="produtos/laranja.png" alt="Bolo de Laranja Natural">
-        </div>
-        <div class="card-header">
-            <span class="card-title">Bolo de Laranja Natural</span>
-        </div>
-        <p class="card-desc">Bolo de laranja natural, super fofinho e de muita qualidade, feito no estilo caseiro com sabor autêntico da fruta. Leve, perfumado e perfeito para acompanhar um café fresquinho.</p>
-        <div class="card-footer">
-            <span class="card-price">R$ 22,00</span>
             <div class="counter">
                 <button class="btn-qty" data-id="6" data-delta="-1">−</button>
                 <span class="qty-val" id="qty-6">0</span>
@@ -243,8 +243,8 @@
         </div>
     </div>
 
-    <div class="pickup-note">
-        <strong>Aviso importante:</strong> no momento, os pedidos devem ser retirados em <strong>Av. Getulio Vargas, em frente ao Asilo</strong>, das <strong>15h as 20h</strong>. O dia e horário de retirada serão combinados via WhatsApp.
+    <div class="delivery-note">
+        <strong>Frete delivery:</strong> entregamos somente em Araranguá. O valor do frete varia conforme o endereço, geralmente entre <strong>R$ 5,00 e R$ 10,00</strong>. Após confirmar o pedido na próxima tela, nossa equipe entra em contato pelo WhatsApp com o valor exato do frete.
     </div>
 
     <button class="btn-submit" id="btn-pedido" disabled>Ir para Checkout</button>
@@ -271,12 +271,12 @@
 
 <script>
     var cardapio = [
-        { id: 1, nome: 'Bolo Ninho Vulcão', preco: 60 },
-        { id: 2, nome: 'Bolo de Limão', preco: 25 },
-        { id: 3, nome: 'Bolo de Leite Ninho', preco: 35 },
-        { id: 4, nome: 'Bolo de Chocolate', preco: 35 },
-        { id: 5, nome: 'Bolo de Chocolate Vulcão', preco: 50 },
-        { id: 6, nome: 'Bolo de Laranja Natural', preco: 22 }
+        { id: 1, nome: 'Bolo de Laranja Natural', preco: 22 },
+        { id: 2, nome: 'Bolo de Cenoura', preco: 22 },
+        { id: 3, nome: 'Bolo Formigueiro', preco: 15 },
+        { id: 4, nome: 'Bolo Mesclado Caseiro', preco: 15 },
+        { id: 5, nome: 'Bolo Amanteigado Caseiro', preco: 12 },
+        { id: 6, nome: 'Bolo de Chocolate', preco: 35 }
     ];
 
     var quantidades = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
